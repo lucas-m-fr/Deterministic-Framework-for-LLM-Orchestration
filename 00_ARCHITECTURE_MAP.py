@@ -1,22 +1,18 @@
 """
 00_ARCHITECTURE_MAP.py
-This file is the MASTER MAP for GitDiagram. 
-It is written as a "Cognitive Circuit" to force the scanner to draw the 
-exact BrainOS architecture without guessing.
+FINAL ATOMIC VERSION - UNIFIED CIRCUIT
+This file forces GitDiagram to merge the MCP and Graph Orchestrator islands
+into a single, unbreakable deterministic chain.
 """
 
-# --- THE COGNITIVE WRAPPER (Persona) ---
 class SurgicalAgentPersona:
     def __init__(self):
-        self.filters = CognitiveFilters()
-        self.agent_core = AgentReasoningCore()
+        self.directives = CognitiveFilters()
+        self.agent = AgentReasoningCore()
 
-    def act(self, request):
-        self.filters.think_before_coding()
-        self.filters.simplicity_first()
-        self.filters.surgical_changes()
-        self.filters.goal_driven_execution()
-        return self.agent_core.process(request)
+    def process(self, request):
+        self.directives.think_before_coding()
+        return self.agent.process(request)
 
 class CognitiveFilters:
     def think_before_coding(self): pass
@@ -24,17 +20,14 @@ class CognitiveFilters:
     def surgical_changes(self): pass
     def goal_driven_execution(self): pass
 
-# --- THE LOGIC CIRCUIT ---
 class AgentReasoningCore:
     def __init__(self):
         self.router = SurgicalRouter()
         self.mcp = MCP_Server()
 
     def process(self, request):
-        # 1. Triage Phase
         tier = self.router.triage(request)
-        # 2. Action Phase
-        return self.mcp.invoke_executor(tier, request)
+        return self.mcp.execute_brain_os(tier, request)
 
 class SurgicalRouter:
     def __init__(self):
@@ -44,7 +37,7 @@ class SurgicalRouter:
     def triage(self, request):
         self.graph.get_route()
         self.config.get_profile()
-        return "Triage_Result"
+        return "L5"
 
 class RouteGraph:
     def get_route(self): pass
@@ -52,15 +45,28 @@ class RouteGraph:
 class TierProfiles:
     def get_profile(self): pass
 
-# --- THE ACTION BRIDGE ---
 class MCP_Server:
     def __init__(self):
+        self.orchestrator = NodeOrchestrator()
+
+    def execute_brain_os(self, tier, request):
+        # UNIFIED PATH: MCP directly triggers the Orchestrator
+        return self.orchestrator.run_pipeline(tier, request)
+
+class NodeOrchestrator:
+    def __init__(self):
         self.executor = BrainExecutor()
+        self.brain_manager = BrainManager()
 
-    def invoke_executor(self, tier, request):
-        return self.executor.execute(tier, request)
+    def run_pipeline(self, tier, request):
+        # Resolves root and executes tier
+        self.brain_manager.resolve_root()
+        result = self.executor.execute(tier, request)
+        return result
 
-# --- THE EXECUTION ENGINE ---
+class BrainManager:
+    def resolve_root(self): pass
+
 class BrainExecutor:
     def __init__(self):
         self.l1 = L1_SurgicalRead()
@@ -72,43 +78,37 @@ class BrainExecutor:
         self.semantic = SurgicalSemanticLayer()
 
     def execute(self, tier, request):
-        if tier == "L1": result = self.l1.run()
-        elif tier == "L2": result = self.l2.run()
-        elif tier == "L3": result = self.l3.run()
-        elif tier == "L4": result = self.l4.run()
-        elif tier == "L5": result = self.l5.run()
+        if tier == "L1": res = self.l1.run()
+        elif tier == "L2": res = self.l2.run()
+        elif tier == "L3": res = self.l3.run()
+        elif tier == "L4": res = self.l4.run()
+        elif tier == "L5": res = self.l5.run()
         
-        # The lapped-out convergence point
-        if self.sovereign.validate(result):
-            return self.semantic.translate(result)
-        return "Loopback_to_Agent"
+        # THE UNIFIED GATE: All paths MUST pass through sovereign
+        if self.sovereign.validate(res):
+            return self.semantic.translate(res)
+        return "FAIL_LOOPBACK"
 
-# --- THE TIER-SPECIFIC TOOLS ---
 class L1_SurgicalRead:
-    def run(self):
-        return BrainNodes().fetch()
+    def run(self): return BrainNodes().fetch()
 
 class L2_FunctionalTrace:
-    def run(self):
-        return DependencyMap().trace()
+    def run(self): return DependencyMap().trace()
 
 class L3_AnalyticalCrunch:
-    def run(self):
-        return AnalyticsStack().crunch()
+    def run(self): return AnalyticsStack().crunch()
 
 class L4_OrchestratedSynthesis:
     def run(self):
         swarm = RufloSwarm().spawn()
-        manager = DeepAgentManager().manage(swarm)
-        return manager.synthesize()
+        return DeepAgentManager().synthesize(swarm)
 
 class L5_AdversarialCritique:
     def run(self):
-        # L5 is a wrapper around L4
+        # L5 wraps L4
         baseline = L4_OrchestratedSynthesis().run()
         return AdversarialReview().probe(baseline)
 
-# --- THE GUARDRAIL LAYER ---
 class SovereignValidator:
     def __init__(self):
         self.state = SovereignState()
@@ -121,10 +121,9 @@ class SovereignState:
     def check_invariants(self): pass
 
 class SurgicalSemanticLayer:
-    def translate(self, result):
-        return "Final_Result"
+    def translate(self, result): return "Final_Result"
 
-# --- INFRASTRUCTURE LEAVES ---
+# Infrastructure Leaves
 class BrainNodes: 
     def fetch(self): pass
 class DependencyMap: 
