@@ -1,38 +1,74 @@
 graph TD
-    %% Entry Point
-    User((User)) -->|submits request| MCP[MCP Tools: mcp_server.py]
+    %% COGNITIVE WRAPPER (The Persona Layer)
+    subgraph Persona [Surgical Agent Persona: CLAUDE.md / SYSTEM.md]
+        direction TB
+        
+        %% The Cognitive Filters
+        Directives{Cognitive Filters}
+        Directives --- Filter1[Think Before Coding]
+        Directives --- Filter2[Simplicity First]
+        Directives --- Filter3[Surgical Changes]
+        Directives --- Filter4[Goal-Driven Execution]
+        
+        %% The Logic Circuit
+        User((User)) -->|Request| Agent[Agent Reasoning Core]
+        Agent -->|1. Triage| Router[Surgical Router: router.py]
+        Router -.->|Reference| Graph[Route Graph: graph.json]
+        Router -.->|Reference| Config[Tier Profiles: config.py]
+        Graph -->|Return Route| Router
+        Config -->|Return Profile| Router
+        Router -->|Assign TierID| Agent
+        
+        Agent -->|2. Action| MCP[MCP Server: mcp_server.py]
+        MCP -->|Invoke| Executor[Brain Executor: executor.py]
+        
+        Executor -->|L1| L1[L1 Surgical Read]
+        Executor -->|L2| L2[L2 Functional Trace]
+        Executor -->|L3| L3[L3 Analytical Crunch]
+        Executor -->|L4| L4[L4 Orchestrated Synthesis]
+        Executor -->|L5| L5[L5 Adversarial Critique]
+        
+        %% Infrastructure Loops
+        L1 -->|Fetch| Nodes[Brain Nodes / Wiki]
+        Nodes -->|Return Data| L1
+        
+        L2 -->|Trace| Deps[Dependency Map]
+        Deps -->|Return Map| L2
+        
+        L3 -->|Crunch| Stack[Analytics Stack: Polars/DuckDB]
+        Stack -->|Return Report| L3
+        
+        L4 -->|Spawn| Swarm[ruflo Swarm / DeepAgents]
+        Swarm -->|Synthesize| L4
+        
+        L5 -->|Baseline| L4
+        L5 -->|Probe| Review[Adversarial Review]
+        Review -->|Return Critique| L5
+        
+        L1 & L2 & L3 & L4 & L5 -->|Pass Output| Executor
+        
+        %% Guardrail Phase
+        Executor -->|3. Validate| Sovereign[Sovereign Validator: sovereign.py]
+        Sovereign -.->|Check| State[Sovereign State: sovereign_state.md]
+        State -->|Return Rules| Sovereign
+        
+        Sovereign -->|FAIL: Non-Sovereign| Agent
+        Sovereign -->|PASS: Sovereign| Semantic[Surgical Semantic Layer]
+        
+        Semantic -->|Result| FinalResult((Final Result))
+    end
     
-    %% Triage Phase
-    MCP -->|routes request| Triage[Tier Triage: router.py]
-    Triage -->|loads profile| Config[Tier Profiles: config.py]
-    Triage -->|maps route| Graph[Route Graph: graph.json]
+    FinalResult --> User
     
-    %% Execution Phase
-    MCP -->|requests execution| Executor[Brain Executor: executor.py]
+    %% Linking Persona to Filters
+    Agent -.->|Governed By| Directives
+    Executor -.->|Governed By| Directives
+    Sovereign -.->|Governed By| Directives
     
-    Executor -->|dispatches L1| L1[L1 Surgical Read: executor.py]
-    Executor -->|dispatches L2| L2[L2 Dependency Trace: executor.py]
-    Executor -->|dispatches L3| L3[L3 Analysis: executor.py]
-    Executor -->|dispatches L4| L4[L4 Synthesis: executor.py]
-    Executor -->|dispatches L5| L5[L5 Critique: executor.py]
-    
-    %% Tier Specifics
-    L1 -->|uses| Graphify[Graphify Pipeline]
-    L2 -->|traces| Deps[Dependency Map]
-    L3 -->|uses| Stack[Analytics Stack: Polars/DuckDB]
-    L4 -->|initializes| Swarm[ruflo Swarm]
-    L4 -->|creates| Manager[DeepAgent Manager]
-    L5 -->|baseline| L4
-    L5 -->|performs| Review[Adversarial Review]
-    
-    %% Guardrail Phase
-    L1 & L2 & L3 & L4 & L5 -->|verifies output| Sovereign[Sovereign Validator: sovereign.py]
-    Sovereign -->|loads constraints| State[Sovereign State: sovereign_state.md]
-    
-    %% Feedback Loop
-    Sovereign -->|if False: loopback| Executor
-    
-    %% Final Delivery
-    Sovereign -->|if True| Semantic[Surgical Semantic Layer]
-    Semantic -->|translates output| Result((Final Result))
-    Result --> User
+    %% Styling
+    style Persona fill:#f5f5f5,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style Agent fill:#f9f,stroke:#333,stroke-width:4px
+    style Sovereign fill:#ff9,stroke:#f00,stroke-width:2px
+    style Executor fill:#bbf,stroke:#333,stroke-width:2px
+    style State fill:#fff,stroke:#f00,stroke-dasharray: 5 5
+    style Directives fill:#fff,stroke:#333,stroke-width:2px
