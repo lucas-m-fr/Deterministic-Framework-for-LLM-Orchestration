@@ -1,0 +1,38 @@
+graph TD
+    %% Entry Point
+    User((User)) -->|submits request| MCP[MCP Tools: mcp_server.py]
+    
+    %% Triage Phase
+    MCP -->|routes request| Triage[Tier Triage: router.py]
+    Triage -->|loads profile| Config[Tier Profiles: config.py]
+    Triage -->|maps route| Graph[Route Graph: graph.json]
+    
+    %% Execution Phase
+    MCP -->|requests execution| Executor[Brain Executor: executor.py]
+    
+    Executor -->|dispatches L1| L1[L1 Surgical Read: executor.py]
+    Executor -->|dispatches L2| L2[L2 Dependency Trace: executor.py]
+    Executor -->|dispatches L3| L3[L3 Analysis: executor.py]
+    Executor -->|dispatches L4| L4[L4 Synthesis: executor.py]
+    Executor -->|dispatches L5| L5[L5 Critique: executor.py]
+    
+    %% Tier Specifics
+    L1 -->|uses| Graphify[Graphify Pipeline]
+    L2 -->|traces| Deps[Dependency Map]
+    L3 -->|uses| Stack[Analytics Stack: Polars/DuckDB]
+    L4 -->|initializes| Swarm[ruflo Swarm]
+    L4 -->|creates| Manager[DeepAgent Manager]
+    L5 -->|baseline| L4
+    L5 -->|performs| Review[Adversarial Review]
+    
+    %% Guardrail Phase
+    L1 & L2 & L3 & L4 & L5 -->|verifies output| Sovereign[Sovereign Validator: sovereign.py]
+    Sovereign -->|loads constraints| State[Sovereign State: sovereign_state.md]
+    
+    %% Feedback Loop
+    Sovereign -->|if False: loopback| Executor
+    
+    %% Final Delivery
+    Sovereign -->|if True| Semantic[Surgical Semantic Layer]
+    Semantic -->|translates output| Result((Final Result))
+    Result --> User
