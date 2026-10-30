@@ -20,6 +20,7 @@ Surgical_Cores = {
     "L2": {"effort": "high", "model": "sonnet"},
     "L3": {"effort": "xhigh", "model": "sonnet"},
     "L4": {"effort": "max", "model": "opus"},
+    "L5": {"effort": "max+", "model": "opus"},
 }
 
 # MCP Endpoints

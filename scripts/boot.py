@@ -41,7 +41,8 @@ def boot_framework():
                 "L1": {"path": ["LiteNode"], "sovereign": True},
                 "L2": {"path": ["IndexNode", "LiteNode"], "sovereign": True},
                 "L3": {"path": ["ExtractionNode", "CleaningNode", "VerificationNode"], "sovereign": False},
-                "L4": {"path": ["ExtractionNode", "CleaningNode", "VerificationNode", "SynthesisNode"], "sovereign": False}
+                "L4": {"path": ["ExtractionNode", "CleaningNode", "VerificationNode", "SynthesisNode"], "sovereign": False},
+                "L5": {"path": ["AdversarialProbeNode", "RubricValidationNode", "FinalDeliveryNode"], "sovereign": True}
             },
             "description": "Deterministic mapping of request tiers to functional nodes."
         }

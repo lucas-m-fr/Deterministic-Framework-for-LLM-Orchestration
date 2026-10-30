@@ -102,7 +102,7 @@ class BrainManager:
         # Create minimal sample weights
         weights_file = root_path / "weights" / "routing_weights.json"
         if not weights_file.exists():
-            weights_file.write_text('{"L1": 0.1, "L2": 0.2, "L3": 0.3, "L4": 0.4}')
+            weights_file.write_text('{"L1": 0.1, "L2": 0.2, "L3": 0.3, "L4": 0.4, "L5": 0.5}')
             
         # Create minimal sample kernels
         kernels_dir = root_path / "kernels"
