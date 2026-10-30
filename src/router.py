@@ -4,7 +4,7 @@ from .config import Surgical_Cores
 
 class TriageEngine:
     """
-    Deterministic router that maps user requests to L1-L4 tiers.
+    Deterministic router that maps user requests to L1-L5 tiers.
     No LLM used here to minimize tokens and latency.
     """
 
@@ -31,7 +31,7 @@ class TriageEngine:
         request_lower = request.lower()
 
         # Priority check: L4 -> L3 -> L2 -> L1
-        for tier in ["L4", "L3", "L2", "L1"]:
+        for tier in ["L5", "L4", "L3", "L2", "L1"]:
             for pattern in self.PATTERNS[tier]:
                 if re.search(pattern, request_lower):
                     return self._build_route_response(tier)

@@ -24,7 +24,7 @@ class LazyGraphLoader:
 class Router:
     """
     Deterministic Router implementing the 4-Tier Escalation Ladder.
-    L1: Surgical-Operational -> L2: Functional Nodes -> L3: Analytical -> L4: Orchestrated.
+    L1: Surgical-Operational -> L2: Functional Nodes -> L3: Analytical -> L4: Orchestrated -> L5: Critique.
     """
     def __init__(self, graph_path: str = "config/graph.json"):
         self.graph_loader = LazyGraphLoader(Path(graph_path))
@@ -36,7 +36,7 @@ class Router:
 
         # 1. Check for dynamic domain matches from the graph
         for domain in routes.keys():
-            if domain not in ["L1", "L2", "L3", "L4"]:
+            if domain not in ["L1", "L2", "L3", "L4", "L5"]:
                 normalized_domain = domain.replace("_", " ").lower()
                 if normalized_domain in query_lower:
                     return domain

@@ -9,7 +9,7 @@ The Surgical Agent does not "think" in loops; it "routes" through a graph.
 ### Step 1: Analyze
 Classify the incoming request. Is it a known path in the `graph.json` or a trivial operation?
 
-### Step 2: Escalate (L1-L4)
+### Step 2: Escalate (L1-L5)
 - **L1:** If the answer is in the current context or a single command, answer now.
 - **L2:** If the request involves a "How do I X" or "Process Y", move to the Operational Index.
 - **L3:** If a specific tool or data-cleaning step is required, activate the Functional Node SOP.

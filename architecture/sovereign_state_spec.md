@@ -14,7 +14,7 @@ An LLM can be technically correct but "architecturally wrong." The Sovereign Sta
    - Ensures the tone is "Surgical" (concise, direct, evidence-based).
    - Prohibits "conversational filler" (e.g., "Here is the result you asked for...").
 3. **Verification Gate:** 
-   - The Sovereign State acts as a boolean gate. If the output does not pass the alignment check, it is sent back to the L4 Orchestrator for correction.
+   - The Sovereign State acts as a boolean gate. If the output does not pass the alignment check, it is sent back to the L4 Orchestrator or L5 Critique for correction.
 
 ## Implementation in Code
 The `SovereignValidator` class reads the `sovereign_state.md` file and compares the final output against these rules using a high-precision validation prompt.

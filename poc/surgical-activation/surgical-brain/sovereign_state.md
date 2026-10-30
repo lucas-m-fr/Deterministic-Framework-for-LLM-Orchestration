@@ -1,7 +1,7 @@
 # Sovereign State: The North Star
 
 ## 🛡️ Operational Constraints
-Any output that violates these rules is considered "Non-Sovereign" and must be routed back to L4 Orchestration.
+Any output that violates these rules is considered "Non-Sovereign" and must be routed back to L4 Orchestration or L5 Critique.
 
 ### 1. Communication Dialect
 - **Surgical Tone**: Zero filler. No greetings, no apologies, no meta-commentary ("Here is the result").

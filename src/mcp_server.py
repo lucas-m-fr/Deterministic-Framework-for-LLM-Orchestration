@@ -8,7 +8,7 @@ mcp = FastMCP("BrainOS-Manager")
 @mcp.tool()
 async def brain_route(request: str) -> str:
     """
-    Determines the complexity tier (L1-L4) and required effort for a request.
+    Determines the complexity tier (L1-L5) and required effort for a request.
     Use this FIRST before calling brain_execute.
     """
     route = triage.route(request)
@@ -18,7 +18,7 @@ async def brain_route(request: str) -> str:
 async def brain_execute(tier: str, request: str, context: str = "{}") -> str:
     """
     Executes the request using the appropriate L-tier tool stack and reasoning depth.
-    L1: Operational, L2: Functional, L3: Analytical, L4: Orchestrated.
+    L1: Operational, L2: Functional, L3: Analytical, L4: Orchestrated, L5: Critique.
     """
     import ast
     ctx = ast.literal_eval(context) if context else {}
