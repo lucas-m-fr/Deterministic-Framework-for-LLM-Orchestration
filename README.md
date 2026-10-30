@@ -1,10 +1,10 @@
-# Deterministic Framework for LLM Orchestration (BrainOS v2.0)
+# Deterministic Framework for LLM Orchestration (BrainOS v2.1)
 
 ## 🧠 The Vision: From Probabilistic to Deterministic
 Most LLM interactions are probabilistic—the model "guesses" the best path. **BrainOS** transforms this into a deterministic cognitive operating system. It treats the LLM as a high-level manager that routes requests through a surgically precise pipeline, ensuring that reasoning depth is always matched to task complexity.
 
-## 🏗️ The Architecture: The 4-Tier Escalation Ladder
-BrainOS doesn't use a "one size fits all" prompt. Every request is routed via the **Surgical Router** into one of four complexity tiers:
+## 🏗️ The Architecture: The 5-Tier Surgical Framework
+BrainOS doesn't use a "one size fits all" prompt. Every request is routed via the **Surgical Router** into one of five complexity tiers:
 
 ### L1: Surgical-Operational (Standard Effort)
 **Goal:** Instant, high-precision retrieval.
@@ -26,6 +26,11 @@ BrainOS doesn't use a "one size fits all" prompt. Every request is routed via th
 **Path:** `User Request` $\rightarrow$ `DeepAgent Manager` $\rightarrow$ `ruflo Swarm` $\rightarrow$ `LangGraph Cycle` (Reason $\rightarrow$ Rubric $\rightarrow$ Correct) $\rightarrow$ `Sovereign State` $\rightarrow$ `Surgical Semantic Layer` $\rightarrow$ `Result`.
 **Use Case:** "Refactor the entire API layer to support multi-tenancy."
 
+### L5: Adversarial Critique (Max+ Effort)
+**Goal:** Zero-defect delivery via adversarial review and quality validation.
+**Path:** `Execution Result` $\rightarrow$ `Adversarial Probe` $\rightarrow$ `Rubric Validation` $\rightarrow$ `Final Delivery`.
+**Use Case:** "Verify the security posture of the new API implementation."
+
 ---
 
 ## 🛠️ The Intelligence Stack
@@ -41,6 +46,8 @@ BrainOS doesn't use a "one size fits all" prompt. Every request is routed via th
 *   **dbt:** Ensuring data quality through tested SQL transformation pipelines.
 
 ### 3. The Guardrail Layer (The Truth)
+*   **Symmetry Check:** Mandatory boot-sequence verification ensuring all active skills are mapped in the brain before execution.
+*   **SkillOpt Evolution:** A closed-loop system (Rollout $\rightarrow$ Reflection $\rightarrow$ Optimization) for iteratively evolving surgical nodes based on execution failures.
 *   **Sovereign State:** The root of trust. Every result is validated against project invariants to ensure zero-drift alignment.
 *   **Surgical Semantic Layer:** Translates technical extraction entities into business-facing definitions.
 
@@ -51,7 +58,7 @@ BrainOS doesn't use a "one size fits all" prompt. Every request is routed via th
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/pramishmaharjan/Deterministic-Framework-for-LLM-Orchestration.git
+git clone https://github.com/lucas-m-fr/Deterministic-Framework-for-LLM-Orchestration.git
 cd Deterministic-Framework-for-LLM-Orchestration
 
 # Setup the BrainOS Service
@@ -94,10 +101,9 @@ cp poc/surgical-activation/surgical-brain/nodes/*.md surgical-brain/nodes/
 Edit `surgical-brain/sovereign_state.md` to define your "North Star" rules (e.g., "All SQL must be Snowflake dialect," "All numbers must be rounded to 2 decimals," "No conversational filler").
 
 ### 4. Boot the Agent
-Restart your Claude Code session. The agent will now boot into the **Surgical Agent** persona and begin utilizing the L1-L4 Escalation Ladder for all operations.
+Restart your Claude Code session. The agent will now boot into the **Surgical Agent** persona and begin utilizing the L1-L5 Escalation Ladder for all operations.
 
 **Verification:** Ask the agent: *"What is your current operational mode?"*
-**Surgical Response:** *"Surgical Agent. BrainOS active. L1-L4 routing engaged."*
+**Surgical Response:** *"Surgical Agent. BrainOS active. L1-L5 routing engaged."*
 
 ---
-
