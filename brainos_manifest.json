@@ -1,0 +1,65 @@
+{
+  "manifest_version": "2.1",
+  "system_identity": "BrainOS - Deterministic LLM Orchestration Framework",
+  "topology": "Star-Schema (Triage-Based)",
+  "workflow": {
+    "entry_point": "mcp_server.py",
+    "triage_center": "router.py",
+    "execution_engine": "executor.py",
+    "guardrail_authority": "sovereign.py"
+  },
+  "deterministic_paths": {
+    "Triage_Phase": {
+      "input": "Natural Language Request",
+      "process": "Signature Analysis via router.py and config.py",
+      "output": "TierID (L1-L5)",
+      "determinism": "Mapped via graph.json"
+    },
+    "Execution_Phase": {
+      "L1_Surgical_Read": {
+        "trigger": "TierID == L1",
+        "pipeline": ["Graphify", "Surgical Read"],
+        "outcome": "Deterministic Fact"
+      },
+      "L2_Functional_Trace": {
+        "trigger": "TierID == L2",
+        "pipeline": ["Graphify BFS", "Dependency Mapping"],
+        "outcome": "Logic Map"
+      },
+      "L3_Analytical_Crunch": {
+        "trigger": "TierID == L3",
+        "pipeline": ["LangStruct", "Polars", "DuckDB", "dbt"],
+        "outcome": "Structured Analysis"
+      },
+      "L4_Orchestrated_Synthesis": {
+        "trigger": "TierID == L4",
+        "pipeline": ["ruflo Swarm", "DeepAgent Manager", "LangGraph Cycle"],
+        "outcome": "Synthesized Solution"
+      },
+      "L5_Adversarial_Critique": {
+        "trigger": "TierID == L5",
+        "pipeline": ["L4_Synthesis_Baseline", "Adversarial Probe", "Rubric Validation"],
+        "outcome": "Zero-Defect Delivery"
+      }
+    },
+    "Validation_Phase": {
+      "input": "Execution Outcome",
+      "process": "Invariants Check via sovereign.py using sovereign_state.md",
+      "output": "Sovereign_Status (Boolean)",
+      "feedback_loop": {
+        "if_false": "Route back to Triage or L4 for correction",
+        "if_true": "Pass to Semantic Translation"
+      }
+    },
+    "Delivery_Phase": {
+      "process": "Semantic Layer Translation",
+      "output": "Business-Ready Result"
+    }
+  },
+  "dependency_graph": {
+    "mcp_server.py": ["router.py", "executor.py"],
+    "router.py": ["config.py", "graph.json"],
+    "executor.py": ["config.py", "sovereign.py", "ruflo_mcp"],
+    "sovereign.py": ["sovereign_state.md"]
+  }
+}
